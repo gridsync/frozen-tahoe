@@ -3,21 +3,16 @@
 # Build frozen Tahoe-LAFS on OS X - virtualenv edition
 #
 
-pip install --upgrade virtualenv
+pip install --upgrade pip virtualenv
+
 virtualenv --clear --python=python2 build/venv
 source build/venv/bin/activate
 
-make make-version
-pip install --upgrade .
+python setup.py update_version
+pip install .
 
-#Ugly hack to disable Tahoe-LAFS' setuptools requirement. Needed for frozen builds.
-sed -i '' 's/"setuptools >= 0.6c6",/#"setuptools >= 0.6c6",/' \
-	build/venv/lib/python2.7/site-packages/allmydata/_auto_deps.py
-
-pip install --upgrade pyinstaller
+pip install pyinstaller
 export PYTHONHASHSEED=1
-pyinstaller --noconfirm tahoe.spec
+pyinstaller tahoe.spec
 python -m zipfile -c dist/Tahoe-LAFS.zip dist/Tahoe-LAFS
 export PYTHONHASHSEED=
-
-deactivate
