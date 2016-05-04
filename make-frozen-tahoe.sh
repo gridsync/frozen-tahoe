@@ -11,7 +11,7 @@ source build/venv/bin/activate
 python setup.py update_version
 pip install .
 
-pip install pyinstaller
+pip install pyinstaller==3.1.1
 export PYTHONHASHSEED=1
 pyinstaller tahoe.spec
 python -m zipfile -c dist/Tahoe-LAFS.zip dist/Tahoe-LAFS
