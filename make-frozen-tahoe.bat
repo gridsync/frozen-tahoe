@@ -10,8 +10,7 @@ call .\build\venv\Scripts\activate
 
 call python setup.py update_version
 call pip install . 
-call pip install pyinstaller==3.1.1
-call pip install zope.interface==4.3.2
+call pip install git+https://github.com/pyinstaller/pyinstaller.git
 
 call set PYTHONHASHSEED=1
 call pyinstaller tahoe.spec
