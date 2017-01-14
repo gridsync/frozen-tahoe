@@ -14,5 +14,4 @@ call pip install git+https://github.com/pyinstaller/pyinstaller.git
 
 call set PYTHONHASHSEED=1
 call pyinstaller tahoe.spec
-call python -m zipfile -c dist\Tahoe-LAFS.zip dist\Tahoe-LAFS
 call set PYTHONHASHSEED=
