@@ -9,7 +9,7 @@ virtualenv --clear --python=python2 build/venv
 source build/venv/bin/activate
 
 python setup.py update_version
-pip install .
+pip install .[tor]
 pip install git+https://github.com/pyinstaller/pyinstaller.git
 
 export PYTHONHASHSEED=1

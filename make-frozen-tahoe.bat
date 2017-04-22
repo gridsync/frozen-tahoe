@@ -9,7 +9,7 @@ call C:\Python27\python.exe -m virtualenv --clear .\build\venv
 call .\build\venv\Scripts\activate
 
 call python setup.py update_version
-call pip install . 
+call pip install .[tor]
 call pip install git+https://github.com/pyinstaller/pyinstaller.git
 
 call set PYTHONHASHSEED=1
