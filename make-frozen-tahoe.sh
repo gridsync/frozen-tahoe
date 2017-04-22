@@ -13,5 +13,5 @@ pip install .[tor]
 pip install git+https://github.com/pyinstaller/pyinstaller.git
 
 export PYTHONHASHSEED=1
-pyinstaller tahoe.spec
+pyinstaller -y tahoe.spec
 export PYTHONHASHSEED=

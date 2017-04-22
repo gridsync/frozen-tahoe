@@ -13,5 +13,5 @@ call pip install .[tor]
 call pip install git+https://github.com/pyinstaller/pyinstaller.git
 
 call set PYTHONHASHSEED=1
-call pyinstaller tahoe.spec
+call pyinstaller -y tahoe.spec
 call set PYTHONHASHSEED=
