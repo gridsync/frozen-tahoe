@@ -12,6 +12,11 @@ python setup.py update_version
 pip install .[tor]
 pip install git+https://github.com/pyinstaller/pyinstaller.git
 
+# Recompile libsodium for the target machine; needed for older Macs
+case `uname` in \
+    Darwin) pip install -I --no-deps --no-binary PyNaCl PyNaCl ;; \
+esac
+
 export PYTHONHASHSEED=1
 pyinstaller -y tahoe.spec
 export PYTHONHASHSEED=
