@@ -44,7 +44,7 @@ frozen-tahoe:
 	mkdir -p dist/Tahoe-LAFS/challenge_bypass_ristretto && \
 	cp -R $$(python -c 'import site, sys;print site.getsitepackages()[0] if hasattr(sys, "real_prefix") else site.getusersitepackages()')/challenge_bypass_ristretto/*.so dist/Tahoe-LAFS/challenge_bypass_ristretto && \
 	popd && \
-	mv build/tahoe-lafs/dist/Tahoe-LAFS dist
+	mv build/tahoe-lafs/dist/* dist
 
 all:
 	@case `uname` in \
