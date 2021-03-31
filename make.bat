@@ -25,7 +25,7 @@ call git apply --ignore-space-change --ignore-whitespace tahoe-lafs-inject-zkapa
 call copy ..\..\patches\tahoe-lafs-rsa-public-exponent-65537.patch .
 call git apply --ignore-space-change --ignore-whitespace tahoe-lafs-rsa-public-exponent-65537.patch
 call python setup.py update_version
-call python -m pip install -r ..\..\requirements\tahoe-lafs.txt
+call python -m pip install -r ..\..\requirements.txt
 call git clone https://github.com/PrivateStorageio/ZKAPAuthorizer .\build\ZKAPAuthorizer
 call copy ..\..\patches\zkapauthorizer-retry-interval.patch .\build\ZKAPAuthorizer
 call pushd .\build\ZKAPAuthorizer
@@ -34,7 +34,6 @@ call git apply --ignore-space-change --ignore-whitespace zkapauthorizer-retry-in
 call python -m pip install .
 call popd
 call python -m pip install .
-call python -m pip install -r ..\..\requirements\pyinstaller.txt
 call python -m pip list
 call copy ..\..\pyinstaller.spec pyinstaller.spec
 call set PYTHONHASHSEED=1

@@ -25,7 +25,7 @@ frozen-tahoe:
 	git apply tahoe-lafs-rsa-public-exponent-65537.patch && \
 	python setup.py update_version && \
 	export CFLAGS=-g0 && \
-	python -m pip install -r ../../requirements/tahoe-lafs.txt && \
+	python -m pip install -r ../../requirements.txt && \
 	git clone https://github.com/PrivateStorageio/ZKAPAuthorizer build/ZKAPAuthorizer && \
 	cp ../../patches/zkapauthorizer-retry-interval.patch build/ZKAPAuthorizer && \
 	pushd build/ZKAPAuthorizer && \
@@ -34,7 +34,6 @@ frozen-tahoe:
 	python -m pip install . && \
 	popd && \
 	python -m pip install . && \
-	python -m pip install -r ../../requirements/pyinstaller.txt && \
 	python -m pip list && \
 	export PYTHONHASHSEED=1 && \
 	cp ../../pyinstaller.spec pyinstaller.spec && \
