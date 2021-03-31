@@ -2,7 +2,11 @@
 
 from __future__ import print_function
 
+import hashlib
+import os
+import stat
 import sys
+import zipfile
 from distutils.sysconfig import get_python_lib
 
 # https://github.com/pyinstaller/pyinstaller/wiki/Recipe-remove-tkinter-tcl
@@ -75,3 +79,59 @@ coll = COLLECT(
     upx=False,
     name="Tahoe-LAFS",
 )
+
+
+def make_zip(base_name, root_dir=None, base_dir=None):
+    zipfile_path = os.path.abspath(base_name)
+    if not root_dir:
+        root_dir = os.getcwd()
+    if not base_dir:
+        base_dir = os.getcwd()
+
+    cwd = os.getcwd()
+    os.chdir(root_dir)
+
+    paths = []
+    for root, directories, files in os.walk(base_dir):
+        for file in files:
+            paths.append(os.path.join(root, file))
+        for directory in directories:
+            dirpath = os.path.join(root, directory)
+            if os.path.islink(dirpath):
+                paths.append(dirpath)
+            elif not os.listdir(dirpath):  # Directory is empty
+                paths.append(dirpath + "/")
+
+    with zipfile.ZipFile(zipfile_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for path in sorted(paths):
+            zinfo = zipfile.ZipInfo(path)
+            zinfo.date_time = (2021, 1, 1, 0, 0, 0)
+            if path.endswith("/"):
+                zinfo.external_attr = (0o755 | stat.S_IFDIR) << 16
+                zf.writestr(zinfo, "")
+            elif os.path.islink(path):
+                zinfo.filename = path  # To strip trailing "/" from dirs
+                zinfo.create_system = 3
+                zinfo.external_attr = (0o755 | stat.S_IFLNK) << 16
+                zf.writestr(zinfo, os.readlink(path))
+            else:
+                if os.access(path, os.X_OK):
+                    zinfo.external_attr = (0o755 | stat.S_IFREG) << 16
+                else:
+                    zinfo.external_attr = (0o644 | stat.S_IFREG) << 16
+                with open(path) as f:
+                    zf.writestr(zinfo, f.read())
+    os.chdir(cwd)
+
+
+def sha256sum(filepath):
+    hasher = hashlib.sha256()
+    with open(os.path.abspath(filepath), "rb") as f:
+        for block in iter(lambda: f.read(4096), b""):
+            hasher.update(block)
+    return hasher.hexdigest()
+
+
+zip_path = os.path.join("dist", "Tahoe-LAFS.zip")
+make_zip(zip_path, "dist", "Tahoe-LAFS")
+print("{}  {}".format(sha256sum(zip_path), zip_path))
