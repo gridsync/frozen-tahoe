@@ -2,8 +2,10 @@
 
 from __future__ import print_function
 
+import glob
 import hashlib
 import os
+import shutil
 import stat
 import sys
 import zipfile
@@ -79,6 +81,16 @@ coll = COLLECT(
     upx=False,
     name="Tahoe-LAFS",
 )
+
+
+# These directories are not needed and the presence of the dot
+# within them has broken macOS notarization in the past.
+for path in glob.glob(
+    os.path.join("dist", "Tahoe-LAFS", "cryptography-*-py2.7.egg-info")
+):
+    shutil.rmtree(path)
+shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "include", "python2.7"))
+shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "lib", "python2.7"))
 
 
 def make_zip(base_name, root_dir=None, base_dir=None):
