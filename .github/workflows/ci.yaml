@@ -1,0 +1,83 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  Linux:
+    strategy:
+      matrix:
+        os:
+          - runs-on: ubuntu-20.04
+          - runs-on: ubuntu-18.04
+    runs-on: ${{ matrix.os.runs-on }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+   - name: Make (1)
+      run: |
+        make all
+   - name: Make (2)
+      run: |
+        make all
+    - name: Verify
+      run: |
+        dist/Tahoe-LAFS/tahoe --version-and-path
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        path: dist/Tahoe-LAFS.zip
+        name: Tahoe-LAFS-${{ matrix.os.runs-on }}.zip
+  macOS:
+    strategy:
+      matrix:
+        os:
+          - runs-on: macos-11.0
+          - runs-on: macos-10.15
+    runs-on: ${{ matrix.os.runs-on }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+   - name: Make (1)
+      run: |
+        make all
+   - name: Make (2)
+      run: |
+        make all
+    - name: Verify
+      run: |
+        dist/Tahoe-LAFS/tahoe --version-and-path
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        path: dist/Tahoe-LAFS.zip
+        name: Tahoe-LAFS-${{ matrix.os.runs-on }}.zip
+  Windows:
+    strategy:
+      matrix:
+        os:
+          - runs-on: windows-2019
+    runs-on: ${{ matrix.os.runs-on }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Make (1)
+      run: |
+        make.bat 
+   - name: Make (2)
+      run: |
+        make.bat clean
+        make.bat
+    - name: Verify
+      run: |
+        dist/Tahoe-LAFS/tahoe.exe --version-and-path
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        path: dist/Tahoe-LAFS.zip
+        name: Tahoe-LAFS-${{ matrix.os.runs-on }}.zip 
