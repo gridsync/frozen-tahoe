@@ -17,7 +17,7 @@ jobs:
         fetch-depth: 0
     - name: Install dependencies
       run: |
-        python2 -m pip install --upgrade setuptools pip virtualenv
+        python2 -m pip install --upgrade virtualenv
     - name: Make (1)
       run: |
         make all
@@ -46,7 +46,7 @@ jobs:
         fetch-depth: 0
     - name: Install dependencies
       run: |
-        python2 -m pip install --upgrade setuptools pip virtualenv
+        python2 -m pip install --upgrade virtualenv
     - name: Make (1)
       run: |
         make all
@@ -74,7 +74,7 @@ jobs:
         fetch-depth: 0
     - name: Install dependencies
       run: |
-        py -2 -m pip install --upgrade setuptools pip virtualenv
+        py -2 -m pip install --upgrade virtualenv
     - name: Make (1)
       run: |
         make.bat 
