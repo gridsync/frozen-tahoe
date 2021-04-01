@@ -15,6 +15,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Install dependencies
+      run: |
+        python2 -m pip install --upgrade setuptools pip virtualenv
     - name: Make (1)
       run: |
         make all
@@ -41,6 +44,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Install dependencies
+      run: |
+        python2 -m pip install --upgrade setuptools pip virtualenv
     - name: Make (1)
       run: |
         make all
@@ -66,6 +72,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Install dependencies
+      run: |
+        py -2 -m pip install --upgrade setuptools pip virtualenv
     - name: Make (1)
       run: |
         make.bat 
