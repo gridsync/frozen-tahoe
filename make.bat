@@ -38,8 +38,6 @@ call python -m pip list
 call copy ..\..\pyinstaller.spec pyinstaller.spec
 call set PYTHONHASHSEED=1
 call python -m PyInstaller pyinstaller.spec
-call mkdir dist\Tahoe-LAFS\challenge_bypass_ristretto
-call copy ..\venv-tahoe\Lib\site-packages\challenge_bypass_ristretto\*.pyd dist\Tahoe-LAFS\challenge_bypass_ristretto\
 call move dist ..\..
 call popd
 call deactivate

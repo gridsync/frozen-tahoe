@@ -6,6 +6,7 @@ import glob
 import hashlib
 import os
 import shutil
+import site
 import stat
 import sys
 import zipfile
@@ -91,6 +92,23 @@ for path in glob.glob(
     shutil.rmtree(path)
 shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "include", "python2.7"))
 shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "lib", "python2.7"))
+
+
+# The (rustc compiled) python-challenge-bypass-ristretto library
+# gets missed by PyInstaller for some reason so add it manually.
+os.makedirs(os.path.join("dist", "Tahoe-LAFS", "challenge_bypass_ristretto"))
+if hasattr(sys, "real_prefix"):
+    site_packages = site.getsitepackages()[0]
+else:
+    site_packages = site.getusersitepackages()
+shutil.copy2(
+    glob.glob(
+        os.path.join(
+            site_packages, "challenge_bypass_ristretto", "_native__lib.*"
+        )
+    )[0],
+    os.path.join("dist", "Tahoe-LAFS", "challenge_bypass_ristretto"),
+)
 
 
 def make_zip(base_name, root_dir=None, base_dir=None):
