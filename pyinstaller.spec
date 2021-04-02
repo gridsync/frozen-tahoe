@@ -89,9 +89,18 @@ coll = COLLECT(
 for path in glob.glob(
     os.path.join("dist", "Tahoe-LAFS", "cryptography-*-py2.7.egg-info")
 ):
-    shutil.rmtree(path)
-shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "include", "python2.7"))
-shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "lib", "python2.7"))
+    try:
+        shutil.rmtree(path)
+    except OSError:
+        pass
+try:
+    shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "include", "python2.7"))
+except OSError:
+    pass
+try:
+    shutil.rmtree(os.path.join("dist", "Tahoe-LAFS", "lib", "python2.7"))
+except OSError:
+    pass
 
 
 # The (rustc compiled) python-challenge-bypass-ristretto library
