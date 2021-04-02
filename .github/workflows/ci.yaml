@@ -77,11 +77,11 @@ jobs:
         py -2 -m pip install --upgrade virtualenv
     - name: Make (1)
       run: |
-        make.bat 
+        .\make.bat 
     - name: Make (2)
       run: |
-        make.bat clean
-        make.bat
+        .\make.bat clean
+        .\make.bat
     - name: Verify
       run: |
         dist/Tahoe-LAFS/tahoe.exe --version-and-path
