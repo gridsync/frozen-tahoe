@@ -38,6 +38,8 @@ call python -m pip list
 call copy ..\..\pyinstaller.spec pyinstaller.spec
 call set PYTHONHASHSEED=1
 call python -m PyInstaller pyinstaller.spec
+call dir dist
+call dir ..\..
 call move dist ..\..
 call popd
 call deactivate
