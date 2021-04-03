@@ -107,7 +107,10 @@ except OSError:
 # gets missed by PyInstaller for some reason so add it manually.
 os.makedirs(os.path.join("dist", "Tahoe-LAFS", "challenge_bypass_ristretto"))
 if hasattr(sys, "real_prefix"):
-    site_packages = site.getsitepackages()[0]
+    if sys.platform == "win32":
+        site_packages = site.getsitepackages()[1]
+    else:
+        site_packages = site.getsitepackages()[0]
 else:
     site_packages = site.getusersitepackages()
 print('#########', site_packages)
