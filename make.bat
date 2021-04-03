@@ -42,6 +42,7 @@ call dir dist
 call dir ..\..
 ::call move dist ..\..
 call popd
+call move build\tahoe-lafs\dist\Tahoe-LAFS dist
 call move build\tahoe-lafs\dist\* dist
 call dir dist
 call deactivate
