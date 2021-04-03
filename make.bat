@@ -40,8 +40,10 @@ call set PYTHONHASHSEED=1
 call python -m PyInstaller pyinstaller.spec
 call dir dist
 call dir ..\..
-call move dist ..\..
+::call move dist ..\..
 call popd
+call move build\tahoe-lafs\dist\* dist
+call dir dist
 call deactivate
 goto :eof
 
