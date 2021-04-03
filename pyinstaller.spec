@@ -113,7 +113,6 @@ if hasattr(sys, "real_prefix"):
         site_packages = site.getsitepackages()[0]
 else:
     site_packages = site.getusersitepackages()
-print('#########', site_packages)
 shutil.copy2(
     glob.glob(
         os.path.join(
