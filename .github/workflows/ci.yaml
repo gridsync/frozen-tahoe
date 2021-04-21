@@ -60,6 +60,7 @@ jobs:
         fetch-depth: 0
     - name: Install dependencies
       run: |
+        sudo rm -rf /Applications/Python*
         brew install openssl readline sqlite3 xz zlib
         git clone --branch 1.2.24 https://github.com/pyenv/pyenv.git ~/.pyenv
         echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
