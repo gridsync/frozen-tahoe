@@ -79,7 +79,7 @@ jobs:
     - name: Make (2)
       run: |
         source ~/.zshrc
-        make all
+        make clean all
     - name: Verify
       run: |
         dist/Tahoe-LAFS/tahoe --version-and-path
