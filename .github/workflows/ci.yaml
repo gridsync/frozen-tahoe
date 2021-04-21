@@ -37,7 +37,7 @@ jobs:
     - name: Make (2)
       run: |
         source ~/.bash_profile
-        make all
+        make clean all
     - name: Verify
       run: |
         dist/Tahoe-LAFS/tahoe --version-and-path
