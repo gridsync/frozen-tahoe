@@ -30,8 +30,6 @@ jobs:
         pyenv rehash
         pyenv global 2.7.18
         python2 -m pip install --upgrade setuptools pip virtualenv
-
-        python2 -m pip install --upgrade virtualenv
     - name: Make (1)
       run: |
         make all
