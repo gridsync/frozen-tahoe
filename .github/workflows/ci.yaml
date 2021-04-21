@@ -32,9 +32,11 @@ jobs:
         python2 -m pip install --upgrade setuptools pip virtualenv
     - name: Make (1)
       run: |
+        source ~/.bash_profile
         make all
     - name: Make (2)
       run: |
+        source ~/.bash_profile
         make all
     - name: Verify
       run: |
