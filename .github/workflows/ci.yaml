@@ -30,6 +30,10 @@ jobs:
         pyenv rehash
         pyenv global 2.7.18
         python2 -m pip install --upgrade setuptools pip virtualenv
+    - name: Test
+      run: |
+        source ~/.bash_profile
+        make test
     - name: Make (1)
       run: |
         source ~/.bash_profile
@@ -74,6 +78,10 @@ jobs:
         pyenv rehash
         pyenv global 2.7.18
         python2 -m pip install --upgrade setuptools pip virtualenv
+    - name: Test
+      run: |
+        source ~/.zshrc
+        make test
     - name: Make (1)
       run: |
         source ~/.zshrc
@@ -104,6 +112,9 @@ jobs:
     - name: Install dependencies
       run: |
         py -2 -m pip install --upgrade virtualenv
+    - name: Test
+      run: |
+        .\make.bat test
     - name: Make (1)
       run: |
         .\make.bat 

@@ -6,6 +6,9 @@ clean:
 	rm -rf build/
 	rm -rf dist/
 
+test:
+	python ./test.py
+
 frozen-tahoe:
 	mkdir -p dist
 	mkdir -p build/tahoe-lafs

@@ -1,6 +1,7 @@
 @echo off
 
 if "%1"=="clean" call :clean
+if "%1"=="test" call :test
 if "%1"=="frozen-tahoe" call :frozen-tahoe
 if "%1"=="all" call :all
 if "%1"=="" call :all
@@ -9,6 +10,10 @@ goto :eof
 :clean
 call rmdir /s /q .\build
 call rmdir /s /q .\dist
+goto :eof
+
+:test
+call py -2.7 .\test.py
 goto :eof
 
 :frozen-tahoe
