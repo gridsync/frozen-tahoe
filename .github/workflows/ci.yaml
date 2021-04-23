@@ -33,11 +33,11 @@ jobs:
     - name: Make (1)
       run: |
         source ~/.bash_profile
-        make all
+        make in-container
     - name: Make (2)
       run: |
         source ~/.bash_profile
-        make clean all
+        make clean in-container
     - name: Verify
       run: |
         dist/Tahoe-LAFS/tahoe --version-and-path
