@@ -58,14 +58,6 @@ jobs:
       run: |
         source ~/.zshrc
         make test
-    - name: Make (1)
-      run: |
-        source ~/.zshrc
-        make all
-    - name: Make (2)
-      run: |
-        source ~/.zshrc
-        make clean all
     - name: Verify
       run: |
         dist/Tahoe-LAFS/tahoe --version-and-path
@@ -91,13 +83,6 @@ jobs:
     - name: Test
       run: |
         .\make.bat test
-    - name: Make (1)
-      run: |
-        .\make.bat 
-    - name: Make (2)
-      run: |
-        .\make.bat clean
-        .\make.bat
     - name: Verify
       run: |
         dist/Tahoe-LAFS/tahoe.exe --version-and-path
