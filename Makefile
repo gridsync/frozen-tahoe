@@ -9,7 +9,7 @@ clean:
 frozen-tahoe:
 	mkdir -p dist
 	mkdir -p build/tahoe-lafs
-	python2 -m virtualenv --clear --python=python2 build/venv-tahoe
+	virtualenv --clear --python=python2 build/venv-tahoe
 	# CPython2 virtualenvs are (irredeemably?) broken on Apple Silicon
 	# so allow falling back to the user environment.
 	# https://github.com/pypa/virtualenv/issues/2023
