@@ -38,6 +38,12 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Restore pyenv cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.pyenv
+        key: pyenv-${{ matrix.os.runs-on }}-${{ hashFiles('.github/workflows/*') }}
+        restore-keys: pyenv-${{ matrix.os.runs-on }}-
     - name: Install dependencies
       run: |
         sudo rm -rf /Applications/Python*
