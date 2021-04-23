@@ -48,7 +48,7 @@ jobs:
       run: |
         sudo rm -rf /Applications/Python*
         brew install openssl readline sqlite3 xz zlib
-        git clone --branch 1.2.24 https://github.com/pyenv/pyenv.git ~/.pyenv
+        git clone --branch 1.2.26 https://github.com/pyenv/pyenv.git ~/.pyenv || true
         echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
         echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
         echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
