@@ -55,7 +55,6 @@ jobs:
         . ~/.zshrc
         export MACOSX_DEPLOYMENT_TARGET="10.13"
         export PYTHON_CONFIGURE_OPTS="--enable-framework"
-        env | sort
         pyenv install --skip-existing 2.7.18
         pyenv rehash
         pyenv global 2.7.18
