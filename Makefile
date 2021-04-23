@@ -41,6 +41,10 @@ frozen-tahoe:
 	popd && \
 	mv build/tahoe-lafs/dist/* dist
 
+in-container:
+	docker run --rm --mount type=bind,src=$$(pwd),target=/frozen-tahoe -w /frozen-tahoe \
+		gridsync/gridsync-builder@sha256:211cbc53640f737433389a024620d189022c7d5b4b93b62b1aaa3d47513b6a15
+
 all:
 	@case `uname` in \
 		Darwin)	arch -x86_64 $(MAKE) frozen-tahoe ;; \
