@@ -33,7 +33,7 @@ jobs:
     - name: Test
       run: |
         source ~/.bash_profile
-        make test
+        make test-in-container
     - name: Make (1)
       run: |
         source ~/.bash_profile

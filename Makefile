@@ -46,7 +46,13 @@ frozen-tahoe:
 
 in-container:
 	docker run --rm --mount type=bind,src=$$(pwd),target=/frozen-tahoe -w /frozen-tahoe \
-		gridsync/gridsync-builder@sha256:211cbc53640f737433389a024620d189022c7d5b4b93b62b1aaa3d47513b6a15
+		gridsync/gridsync-builder@sha256:211cbc53640f737433389a024620d189022c7d5b4b93b62b1aaa3d47513b6a15 \
+		bash -l -c "make"
+
+test-in-container:
+	docker run --rm --mount type=bind,src=$$(pwd),target=/frozen-tahoe -w /frozen-tahoe \
+		gridsync/gridsync-builder@sha256:211cbc53640f737433389a024620d189022c7d5b4b93b62b1aaa3d47513b6a15 \
+		bash -l -c "make test"
 
 all:
 	@case `uname` in \
