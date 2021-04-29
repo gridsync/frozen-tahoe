@@ -161,7 +161,7 @@ def make_zip(base_name, root_dir=None, base_dir=None):
                     zinfo.external_attr = (0o755 | stat.S_IFREG) << 16
                 else:
                     zinfo.external_attr = (0o644 | stat.S_IFREG) << 16
-                with open(path) as f:
+                with open(path, "rb") as f:
                     zf.writestr(zinfo, f.read())
     os.chdir(cwd)
 
