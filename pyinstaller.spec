@@ -10,7 +10,6 @@ import site
 import stat
 import sys
 import zipfile
-from distutils.sysconfig import get_python_lib
 
 # https://github.com/pyinstaller/pyinstaller/wiki/Recipe-remove-tkinter-tcl
 sys.modules["FixTk"] = None
