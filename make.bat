@@ -30,7 +30,12 @@ call git apply --ignore-space-change --ignore-whitespace tahoe-lafs-inject-zkapa
 call copy ..\..\patches\tahoe-lafs-rsa-public-exponent-65537.patch .
 call git apply --ignore-space-change --ignore-whitespace tahoe-lafs-rsa-public-exponent-65537.patch
 call python setup.py update_version
+:: The "hkdf" module fails to install on Windows when the USER environment variable is set to "vagrant":
+:: https://github.com/casebeer/python-hkdf/blob/ba0e2eee8f50cc84706f816dbc57897319e2250c/setup.py#L11
+:: So work around this workaround/bug(?) by temporarily changing the case of the value...
+if "%USER%"=="vagrant" (set USER=Vagrant)
 call python -m pip install -r ..\..\requirements.txt
+if "%USER%"=="Vagrant" (set USER=vagrant)
 call git clone https://github.com/PrivateStorageio/ZKAPAuthorizer .\build\ZKAPAuthorizer
 call copy ..\..\patches\zkapauthorizer-retry-interval.patch .\build\ZKAPAuthorizer
 call pushd .\build\ZKAPAuthorizer
