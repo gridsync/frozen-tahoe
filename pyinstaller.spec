@@ -122,7 +122,7 @@ shutil.copy2(
 )
 
 
-def make_zip(base_name, root_dir=None, base_dir=None):
+def make_deterministic_zip(base_name, root_dir=None, base_dir=None):
     zipfile_path = os.path.abspath(base_name)
     if not root_dir:
         root_dir = os.getcwd()
@@ -174,5 +174,5 @@ def sha256sum(filepath):
 
 
 zip_path = os.path.join("dist", "Tahoe-LAFS.zip")
-make_zip(zip_path, "dist", "Tahoe-LAFS")
+make_deterministic_zip(zip_path, "dist", "Tahoe-LAFS")
 print("{}  {}".format(sha256sum(zip_path), zip_path))
