@@ -128,10 +128,8 @@ def make_deterministic_zip(base_name, root_dir=None, base_dir=None):
         root_dir = os.getcwd()
     if not base_dir:
         base_dir = os.getcwd()
-
     cwd = os.getcwd()
     os.chdir(root_dir)
-
     paths = []
     for root, directories, files in os.walk(base_dir):
         for file in files:
@@ -142,7 +140,6 @@ def make_deterministic_zip(base_name, root_dir=None, base_dir=None):
                 paths.append(dirpath)
             elif not os.listdir(dirpath):  # Directory is empty
                 paths.append(dirpath + "/")
-
     with zipfile.ZipFile(zipfile_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in sorted(paths):
             zinfo = zipfile.ZipInfo(path)
