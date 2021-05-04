@@ -9,6 +9,7 @@ import shutil
 import site
 import stat
 import sys
+import time
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 # https://github.com/pyinstaller/pyinstaller/wiki/Recipe-remove-tkinter-tcl
