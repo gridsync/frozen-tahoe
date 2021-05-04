@@ -9,7 +9,7 @@ import shutil
 import site
 import stat
 import sys
-import zipfile
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 # https://github.com/pyinstaller/pyinstaller/wiki/Recipe-remove-tkinter-tcl
 sys.modules["FixTk"] = None
@@ -122,15 +122,22 @@ shutil.copy2(
 )
 
 
-def make_deterministic_zip(base_name, root_dir=None, base_dir=None):
+def make_deterministic_zip(
+    base_name,
+    root_dir=None,
+    base_dir=None,
+    timestamp=1609477200,  # (2021, 1, 1, 0, 0, 0)
+):
     zipfile_path = os.path.abspath(base_name)
     if not root_dir:
         root_dir = os.getcwd()
     if not base_dir:
         base_dir = os.getcwd()
+    year, month, day, hour, minute, second, _, _, _ = time.localtime(timestamp)
+    date_time = (year, month, day, hour, minute, second)
     cwd = os.getcwd()
     os.chdir(root_dir)
-    paths = []
+    paths = [base_dir + "/"]
     for root, directories, files in os.walk(base_dir):
         for file in files:
             paths.append(os.path.join(root, file))
@@ -138,12 +145,12 @@ def make_deterministic_zip(base_name, root_dir=None, base_dir=None):
             dirpath = os.path.join(root, directory)
             if os.path.islink(dirpath):
                 paths.append(dirpath)
-            elif not os.listdir(dirpath):  # Directory is empty
+            else:
                 paths.append(dirpath + "/")
-    with zipfile.ZipFile(zipfile_path, "w", zipfile.ZIP_DEFLATED) as zf:
+    with ZipFile(zipfile_path, "w", ZIP_DEFLATED) as zf:
         for path in sorted(paths):
-            zinfo = zipfile.ZipInfo(path)
-            zinfo.date_time = (2021, 1, 1, 0, 0, 0)
+            zinfo = ZipInfo(path)
+            zinfo.date_time = date_time
             if path.endswith("/"):
                 zinfo.external_attr = (0o755 | stat.S_IFDIR) << 16
                 zf.writestr(zinfo, "")
